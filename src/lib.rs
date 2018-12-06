@@ -1,1 +1,1 @@
-pub mod get_nth_arg;
+pub mod arg;
