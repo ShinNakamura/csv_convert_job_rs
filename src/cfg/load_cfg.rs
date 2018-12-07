@@ -6,7 +6,6 @@
 use std::collections::HashMap;
 use std::error::Error;
 use std::ffi::OsString;
-use std::vec;
 
 #[derive(Debug, Deserialize)]
 struct Record {
