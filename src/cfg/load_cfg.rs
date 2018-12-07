@@ -6,6 +6,7 @@
 use std::collections::HashMap;
 use std::error::Error;
 use std::ffi::OsString;
+use std::vec;
 
 #[derive(Debug, Deserialize)]
 struct Record {
@@ -14,18 +15,25 @@ struct Record {
     name: String,
 }
 
-pub fn load(config_csv_path: OsString) -> Result<HashMap<(usize, usize), String>, Box<Error>> {
+pub fn load(config_csv_path: OsString) -> Result<(HashMap<(usize, usize), String>, Vec<String>), Box<Error>> {
     let mut rdr = csv::Reader::from_path(config_csv_path)?;
-    let mut cfg = HashMap::new();
+    let mut cfg: HashMap<(usize, usize), String> = HashMap::new();
+    let mut hdr: Vec<String> = Vec::new();
     for result in rdr.deserialize() {
         let record: Record = result?;
+
+        {
+            hdr.push(record.name.to_string());
+        }
+
         cfg.insert(
             (record.row, record.column,),
             record.name
             );
+
     }
 
-    Ok(cfg)
+    Ok((cfg, hdr))
 }
 
 
