@@ -1,6 +1,7 @@
 extern crate csv_convert_job_rs;
 use csv_convert_job_rs::arg::get_nth_arg;
 use csv_convert_job_rs::cfg::load_cfg;
+use csv_convert_job_rs::conv::gen;
 
 use std::error::Error;
 use std::process;
@@ -16,6 +17,9 @@ fn run() -> Result<(), Box<Error>> {
     println!("{:#?}", data_csv_path);
 
     // data.csv + cfg = datamap
+    let data_map = gen::gen(data_csv_path, cfg);
+    println!("{:#?}", data_map);
+
     // hdr + datamap = output(csv)
 
     Ok(())
