@@ -1,0 +1,7 @@
+row,column,name,this_column_will_be_ignored
+1,1,color,foo
+1,2,size,foo
+1,3,brand,foo
+2,1,company,foo
+2,2,person,foo
+2,3,orderNum,foo
